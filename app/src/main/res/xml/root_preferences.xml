@@ -1,0 +1,32 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/personal_info_setting">
+
+<!--        <EditTextPreference-->
+<!--            app:key="signature"-->
+<!--            app:title="@string/signature_title"-->
+<!--            app:useSimpleSumaryProvider="true" />-->
+
+        <ListPreference
+            app:defaultValue="reply"
+            app:entries="@array/sex"
+            app:entryValues="@array/sex"
+            app:key="reply"
+            app:title="@string/sex"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/Study_Setting">
+
+        <SwitchPreferenceCompat
+            app:key="sync"
+            app:title="@string/keep_screen_open" />
+
+        <SwitchPreferenceCompat
+            app:key="attachment"
+            app:title="@string/close_app_pet_sick" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
