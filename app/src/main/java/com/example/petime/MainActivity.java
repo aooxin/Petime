@@ -1,6 +1,9 @@
 package com.example.petime;
 
+import android.content.ClipData;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.Toast;
@@ -87,5 +90,16 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-
+    @Override
+    //当菜单被选择的时候,在OnOptionsItemSelected()方法中实现.
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {//获取菜单id
+            case R.id.study:
+                Intent intent = new Intent(MainActivity.this, study.class);
+                item.setIntent(intent);
+                break;
+            default:Toast.makeText(MainActivity.this,"You click Button 1",Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
