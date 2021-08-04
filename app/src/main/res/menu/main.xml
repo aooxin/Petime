@@ -13,7 +13,7 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/study"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/setting"
         android:title="study"
         />
 
