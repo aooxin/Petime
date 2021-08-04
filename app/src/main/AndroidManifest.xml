@@ -36,6 +36,8 @@
         <activity
             android:name=".changeimage"
             android:label="imagechange" />
+        <activity android:name=".login"/>
+        <activity android:name=".regist"/>
     </application>
 
 </manifest>
