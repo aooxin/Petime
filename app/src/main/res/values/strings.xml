@@ -33,4 +33,6 @@
     <string name="keep_screen_open">保持屏幕开启</string>
     <string name="close_app_pet_sick">关闭应用宠物生病</string>
     <string name="diy_encourage_saying">自定鼓励语句</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -19,6 +19,12 @@ public class SettingFragment extends Fragment {
     private SettingViewModel settingViewModel;
     private FragmentHomeBinding binding;
 
+    @Override
+    public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         settingViewModel =

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -21,6 +23,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.petime.databinding.ActivityMainBinding;
 
+/**
+ * 这个Activity要实现一个接口，用于响应菜单的单击事件，做出处理
+ */
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -30,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        Intent intent=new Intent(MainActivity.this, login.class);
+        Intent intent = new Intent(MainActivity.this, login.class);
         startActivity(intent);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -43,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
+        //获取抽屉布局并设置监听
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
@@ -57,6 +62,22 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        //Image的点击事件🤪
+        //先定位到侧边
+        LinearLayout linearLayout = (LinearLayout) navigationView.inflateHeaderView(R.layout.nav_header_main);
+        //从侧边再定位到imageer_main);
+        ImageView imageView = (ImageView) linearLayout.findViewById(R.id.imageView);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "You click Image", Toast.LENGTH_SHORT).show();
+//              这个有一些奇怪的问题，应该是activity的生命的问题🤕
+//                TODO：修改这个生命bug
+                Intent intent2 = new Intent(MainActivity.this, changeimage.class);
+                //Intent intent2=new Intent("com.example.activitytest.ACTIONSTART");
+                startActivity(intent2);
+            }
+        });
         //增加数据库
 //        new Thread(new Runnable() {
 //            @Override
@@ -90,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
     @Override
     //当菜单被选择的时候,在OnOptionsItemSelected()方法中实现.
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -98,7 +120,8 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, study.class);
                 item.setIntent(intent);
                 break;
-            default:Toast.makeText(MainActivity.this,"You click Button 1",Toast.LENGTH_SHORT).show();
+            default:
+                Toast.makeText(MainActivity.this, "You click Button 1", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }
