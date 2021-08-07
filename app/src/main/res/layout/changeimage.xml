@@ -4,12 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-<<<<<<< HEAD
-    tools:context=".MainActivity">
-=======
     tools:context=".changeimage">
-    android:requstLegacyExternalStorage="true"
->>>>>>> d508ece84a1ef522fba1b497301602a5f46f23fa
     <ImageView
         android:id="@+id/iv_head"
         android:layout_width="150dp"
