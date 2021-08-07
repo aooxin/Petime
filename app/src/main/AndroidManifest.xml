@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.petime">
 
     <uses-permission android:name="android.permission.CAMERA" />
@@ -17,6 +18,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Petime">
+        <activity
+            android:name=".CountDownView"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".clock"
+            android:exported="true" />
         <activity android:name=".splashscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,7 +41,6 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.Petime.NoActionBar">
-
         </activity>
         <activity
             android:name=".changeimage"

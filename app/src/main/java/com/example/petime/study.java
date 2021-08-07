@@ -1,16 +1,22 @@
 package com.example.petime;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -18,39 +24,117 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class study extends AppCompatActivity {
-    private LinearLayout linearLayout;
     //Button索引
     private LinkedList<Button> ListBtn_Show;
     //TextView索引
-    private LinkedList<TextView> ListText_Def;
-    private Button btn_add, btn_edit;
+    private LinkedList<TextView> ListText_time;
+    private Map<Integer,Integer> map=new HashMap<Integer, Integer>();
+    private Button btn_add, btn_edit,begin;
     //判断btn_edit的状态
+    private TextView textView,textname;
     private int EDITSTATE = 0;
-
+    private int begin_id=1000;
+    private int time_id=2000;
+    private int name_id=3000;
+    static int time=0;
+    static int count=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         setContentView(R.layout.activity_study);
         ScrollView scrollView = (ScrollView) findViewById(R.id.scrollView);
         inited();
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish(); // back button
+                break;
 
+        }
+        return super.onOptionsItemSelected(item);
+    }
     private void inited() {
+        final LinearLayout linearLayout;
         linearLayout = (LinearLayout) findViewById(R.id.linearlayout);
         ListBtn_Show = new LinkedList<Button>();
-        ListText_Def = new LinkedList<TextView>();
+        ListText_time=new LinkedList<TextView>();
+        final LayoutInflater inflater=LayoutInflater.from(this);
         btn_edit = (Button) findViewById(R.id.btn_edit);
         btn_add = (Button) findViewById(R.id.btn_add);
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addBtn();//动态添加按钮
+                LinearLayout ly=(LinearLayout)inflater.inflate(R.layout.activity_todo,linearLayout,false).findViewById(R.id.todo_layout);
+                LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                linearLayout.addView(ly);
+                begin=(Button)findViewById(R.id.begin);
+                begin.setId(begin_id);
+                ListBtn_Show.add(begin);
+                begin.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(study.this,"Begin",Toast.LENGTH_SHORT).show();
+                        int i = 0;
+                        for (; i <ListBtn_Show.size(); i++) {
+                            if (ListBtn_Show.get(i) == view) {
+                                i=map.get(ListBtn_Show.get(i).getId());
+                                break;
+                            }
+                        }
+                        TextView te=findViewById(i);
+                        String h=te.getText().toString();
+                        h=h.substring(0,h.length()-2);
+                        time=Integer.parseInt(h);
+                        Intent intent=new Intent(study.this,clock.class);
+                        intent.putExtra("data",time);
+                        startActivity(intent);
+                    }
+                });
+                textname=(TextView)findViewById(R.id.todo_name);
+                textname.setId(name_id);
+                textView=(TextView)findViewById(R.id.todo_time);
+                textView.setId(time_id);
+                map.put(begin_id,time_id);
+                name_id++;
+                time_id++;
+                begin_id ++;
+                textView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        LinearLayout ly1=(LinearLayout)inflater.inflate(R.layout.clockpopup,linearLayout,false).findViewById(R.id.clock_popup);
+                        linearLayout.addView(ly1);
+                        Button OK=(Button)findViewById(R.id.OK);
+                        EditText ed_time=(EditText)findViewById(R.id.time);
+                        EditText ed_title=(EditText)findViewById(R.id.title);
+                        OK.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                textView.setText(ed_time.getText().toString()+"分钟");
+                                textname.setText(ed_title.getText());
+                                linearLayout.removeView(ly1);
+                            }
+                        });
+                    }
+                });
             }
         });
+
         btn_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,85 +148,7 @@ public class study extends AppCompatActivity {
                 }
             }
         });
+
     }
 
-    private void addBtn() {//动态添加按钮
-        //添加承载两个按钮的LinearLayout
-        LinearLayout linear_btn = new LinearLayout(this);
-        linear_btn.setOrientation(LinearLayout.HORIZONTAL);
-        LinearLayout.LayoutParams liParam = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        linear_btn.setLayoutParams(liParam);
-        Toast.makeText(study.this,"You click Button 1",Toast.LENGTH_SHORT).show();
-        //添加Button
-        Button btnShow = new Button(this);
-        LinearLayout.LayoutParams btnAddPar = new LinearLayout.LayoutParams
-                (ViewGroup.LayoutParams.WRAP_CONTENT, 80, 3);//设置宽高及占比
-        btnAddPar.setMargins(0, 10, 0, 10);
-        btnShow.setLayoutParams(btnAddPar);
-        btnShow.setText(ListBtn_Show.size() + "");
-        btnShow.setTextColor(Color.argb(255, 255, 255, 255));
-        btnShow.setBackgroundColor(Color.argb(255, 52, 171, 139));
-        btnShow.setOnClickListener(new View.OnClickListener() {//动态添加点击事件
-            @Override
-            public void onClick(View view) {
-                if (EDITSTATE == 1)
-                    delBtn(view);//动态删除按钮
-            }
-        });
-        linear_btn.addView(btnShow);//把btnShow添加到linear_btn中
-        ListBtn_Show.add(btnShow);//把btnShow添加到索引中
-
-        //添加TextView
-        TextView textDef = new TextView(this);
-        LinearLayout.LayoutParams btnDefPar = new LinearLayout.LayoutParams
-                (ViewGroup.LayoutParams.WRAP_CONTENT, 80, 1);//设置宽高及占比
-        btnDefPar.setMargins(0, 10, 0, 10);
-        textDef.setLayoutParams(btnDefPar);
-        textDef.setText("设为默认");
-        textDef.setGravity(Gravity.CENTER);
-        textDef.setTextColor(Color.argb(255, 255, 255, 255));
-        textDef.setBackgroundColor(Color.argb(255, 52, 171, 139));
-        textDef.setOnClickListener(new View.OnClickListener() {//动态加点击事件
-            @Override
-            public void onClick(View view) {
-                setDef(view);//设置默认
-            }
-        });
-        linear_btn.addView(textDef);//把textDef添加到linear_btn中
-        ListText_Def.add(textDef);//把textDef添加到索引中
-
-        linearLayout.addView(linear_btn);//把linear_btn添加到外层linearLayout中
-    }
-
-    private void setDef(View view) {//设置默认
-        //遍历索引里的所有TextView
-        for (int i = 0; i < ListText_Def.size(); i++) {
-            ListText_Def.get(i).setBackgroundColor(Color.argb(255, 52, 171, 139));
-            ListText_Def.get(i).setText("设为默认");
-            if (ListText_Def.get(i) == view) {
-                view.setBackgroundColor(Color.argb(255, 171, 52, 56));
-                ListText_Def.get(i).setText("默认");
-            }
-        }
-    }
-
-    private void delBtn(View view) {//动态删除按钮
-        if (view == null) {
-            return;
-        }
-        int position = -1;
-        for (int i = 0; i < ListBtn_Show.size(); i++) {
-            if (ListBtn_Show.get(i) == view) {
-                position = i;
-                break;
-            }
-        }
-        if (position >= 0) {
-            ListBtn_Show.remove(position);//从索引中移除被删除的Button
-            ListText_Def.remove(position);//从索引中移除被删除的TextView
-            linearLayout.removeViewAt(position + 1);//在外出linearLayout删除内部指定位置所有控件
-        }
-    }
 }
