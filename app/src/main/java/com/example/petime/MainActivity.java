@@ -1,27 +1,25 @@
 package com.example.petime;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.navigation.NavigationView;
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.petime.databinding.ActivityMainBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 /**
  * 这个Activity要实现一个接口，用于响应菜单的单击事件，做出处理
@@ -123,6 +121,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.right_setting:
                 Intent intent2 = new Intent(MainActivity.this, SettingsActivity.class);
                 item.setIntent(intent2);
+                break;
+            case R.id.r_suggestion:
+                Intent intent3 = new Intent(MainActivity.this, FeedbackActivity2.class);
+                item.setIntent(intent3);
                 break;
             default:
                 Toast.makeText(MainActivity.this, "You click Button 1", Toast.LENGTH_SHORT).show();
