@@ -19,6 +19,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Petime">
         <activity
+            android:name=".SettingsActivity"
+            android:exported="true"
+            android:label="@string/title_activity_settings" />
+        <activity
             android:name=".CountDownView"
             android:exported="true"
             tools:ignore="Instantiatable" />
@@ -33,22 +37,21 @@
             </intent-filter>
         </activity>
         <activity android:name=".todo" />
-        <activity android:name=".study" />
-<!--        <activity-->
-<!--            android:name=".ui.SettingsActivity"-->
-<!--            android:label="@string/title_activity_settings" />-->
+        <activity android:name=".study" /> <!-- <activity -->
+        <!-- android:name=".ui.SettingsActivity" -->
+        <!-- android:label="@string/title_activity_settings" /> -->
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Petime.NoActionBar">
-        </activity>
+            android:theme="@style/Theme.Petime.NoActionBar"></activity>
         <activity
             android:name=".changeimage"
-            android:label="imagechange" >
-<!--            <intent-filter>-->
-<!--                <action android:name="com.example.activitytest.ACTIONSTART"/>-->
-<!--                <category android:name="android.intent.category.DEFAULT"/>-->
-<!--            </intent-filter>-->
+            android:label="imagechange">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="com.example.activitytest.ACTIONSTART"/> -->
+            <!-- <category android:name="android.intent.category.DEFAULT"/> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".login" />
         <activity android:name=".regist" />
