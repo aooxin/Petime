@@ -120,6 +120,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, study.class);
                 item.setIntent(intent);
                 break;
+            case R.id.right_setting:
+                Intent intent2 = new Intent(MainActivity.this, SettingsActivity.class);
+                item.setIntent(intent2);
+                break;
             default:
                 Toast.makeText(MainActivity.this, "You click Button 1", Toast.LENGTH_SHORT).show();
         }

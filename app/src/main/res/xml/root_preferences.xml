@@ -2,10 +2,10 @@
 
     <PreferenceCategory app:title="@string/personal_info_setting">
 
-<!--        <EditTextPreference-->
-<!--            app:key="signature"-->
-<!--            app:title="@string/signature_title"-->
-<!--            app:useSimpleSumaryProvider="true" />-->
+        <!--        <EditTextPreference-->
+        <!--            app:key="signature"-->
+        <!--            app:title="@string/signature_title"-->
+        <!--            app:useSimpleSumaryProvider="true" />-->
 
         <ListPreference
             app:defaultValue="reply"
