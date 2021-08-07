@@ -3,12 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< HEAD
         <entry key="..\:/git-server/Petime/app/src/main/res/drawable/shape.xml" value="0.4466666666666667" />
         <entry key="..\:/git-server/Petime/app/src/main/res/layout/activity_count_down_view.xml" value="0.16458333333333333" />
         <entry key="..\:/git-server/Petime/app/src/main/res/layout/activity_study.xml" value="0.1" />
         <entry key="..\:/git-server/Petime/app/src/main/res/layout/activity_todo.xml" value="0.1" />
         <entry key="..\:/git-server/Petime/app/src/main/res/layout/app_bar_main.xml" value="0.17916666666666667" />
         <entry key="..\:/git-server/Petime/app/src/main/res/layout/clockpopup.xml" value="0.3333333333333333" />
+=======
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.16869300911854104" />
+        <entry key="app/src/main/res/layout/changeimage.xml" value="0.346875" />
+        <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.16869300911854104" />
+>>>>>>> d508ece84a1ef522fba1b497301602a5f46f23fa
       </map>
     </option>
   </component>

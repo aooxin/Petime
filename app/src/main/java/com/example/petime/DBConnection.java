@@ -2,9 +2,11 @@ package com.example.petime;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class DBConnection {
-    public static void link (){
+    public static int link (int detect,String name,String password2){
         //要连接的数据库url,注意：此处连接的应该是服务器上的MySQl的地址
         String url = "jdbc:mysql://sh-cynosdbmysql-grp-7whhqd4o.sql.tencentcdb.com:23716/personal_info";
         //连接数据库使用的用户名
@@ -24,11 +26,29 @@ public class DBConnection {
             //2、获取与数据库的连接
             connection = DriverManager.getConnection(url, userName, password);
             System.out.println("连接数据库成功！！！");
-            //3.sql语句
-            String sql = "INSERT INTO driver (id, name) VALUES ( '24100413', 'ljy')";
-            //4.获取用于向数据库发送sql语句的ps
-            PreparedStatement ps=connection.prepareStatement(sql);
-            ps.execute(sql);
+            switch (detect){
+                //判断用户名是否存在
+                case 0:{
+                    Statement st= connection.createStatement();
+                    ResultSet rs = st.executeQuery("select * from Try where name="+name);
+                    if (rs.next()) {
+                        return -1;
+                    }
+                }
+                case 1:{
+                    String sql = "insert into Try "+ " values(" + "'" + name + "'" + "," + "'" + password2+ "'" + ")";
+                    PreparedStatement ps = connection.prepareStatement(sql);
+                    ps.execute(sql);
+                }
+                case 2:{
+                    Statement st= connection.createStatement();
+                    ResultSet rs = st.executeQuery("select * from Try where name="+name);
+                    if(rs.next()){
+                        if(!rs.getString("password").equals(password2))
+                            return -1;
+                    }
+                }
+            }
 
         }catch (Exception e) {
             e.printStackTrace();
@@ -42,6 +62,6 @@ public class DBConnection {
                 }
             }
         }
-
+        return 1;
     }
 }
