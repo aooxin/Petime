@@ -17,6 +17,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Petime">
+<<<<<<< HEAD
+        <activity
+            android:name=".CountDownView"
+            android:exported="true" />
+        <activity
+            android:name=".clock"
+            android:exported="true" />
+=======
         <activity android:name=".splashscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,12 +32,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+>>>>>>> d508ece84a1ef522fba1b497301602a5f46f23fa
         <activity android:name=".todo" />
         <activity android:name=".study" />
 <!--        <activity-->
 <!--            android:name=".ui.SettingsActivity"-->
 <!--            android:label="@string/title_activity_settings" />-->
         <activity
+<<<<<<< HEAD
+            android:name=".ui.SettingsActivity"
+            android:label="@string/title_activity_settings" />
+        <activity
+=======
+>>>>>>> d508ece84a1ef522fba1b497301602a5f46f23fa
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.Petime.NoActionBar">
