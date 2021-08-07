@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.petime.CountDownView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/CountDownView"
+    android:layout_width="300dp"
+    android:layout_height="300dp"
+    android:layout_gravity="center_horizontal"
+    tools:context=".CountDownView"
+    app:ringColor="@color/white"
+    app:progressTextSize="50dp"
+    app:progressTextColor="@color/black"
+    app:countdownTime="20">
+
+</com.example.petime.CountDownView>

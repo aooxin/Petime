@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="begin_1" type="id"/>
+    <item name="begin_2" type="id"/>
+    <item name="begin_3" type="id"/>
+    <item name="begin_4" type="id"/>
+    <item name="begin_5" type="id"/>
+    <item name="begin_6" type="id"/>
+    <item name="todo_1" type="id"/>
+    <item name="todo_2" type="id"/>
+    <item name="todo_3" type="id"/>
+    <item name="todo_4" type="id"/>
+    <item name="todo_5" type="id"/>
+    <item name="todo_6" type="id"/>
+
+</resources>
