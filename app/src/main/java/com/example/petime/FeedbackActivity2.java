@@ -12,6 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.HashMap;
 
 public class FeedbackActivity2 extends AppCompatActivity {
@@ -76,6 +81,49 @@ public class FeedbackActivity2 extends AppCompatActivity {
                 // todo 意见反馈为空请输入我们的内容
                 Toast.makeText(FeedbackActivity2.this,"意见不能为空请重新输入",Toast.LENGTH_LONG).show();
             }else{
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //要连接的数据库url,注意：此处连接的应该是服务器上的MySQl的地址
+                        String url = "jdbc:mysql://sh-cynosdbmysql-grp-7whhqd4o.sql.tencentcdb.com:23716/personal_info";
+                        //连接数据库使用的用户名
+                        String userName = "root";
+                        //连接的数据库时使用的密码
+                        String password = "Mmsqwcm.?";
+                        Connection connection=null;
+                        try {
+                            //1、加载驱动
+                            Class.forName("com.mysql.jdbc.Driver").newInstance();
+                            System.out.println("驱动加载成功！！！");
+                        }
+                        catch (Exception e){
+                            e.printStackTrace();
+                        }
+                        try {
+                            //2、获取与数据库的连接
+                            connection = DriverManager.getConnection(url, userName, password);
+                            System.out.println("连接数据库成功！！！");
+
+                            String sql = "insert into feedback "+ " values(" + "'" + s+ "'" + ")";
+                            PreparedStatement ps = connection.prepareStatement(sql);
+                            ps.execute(sql);
+
+
+                        }catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        finally {
+                            if(connection!=null){
+                                try {
+                                    connection.close();
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+                }).start();
+
                 Toast.makeText(FeedbackActivity2.this,"意见提交成功",Toast.LENGTH_LONG).show();
                 mySuggestionSubmit.setText("");
                 // 然后的话在我们的这个位置的话就是清空我们的输入框中的内容
