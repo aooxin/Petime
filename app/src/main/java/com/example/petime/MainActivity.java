@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent2);
             }
         });
-        //增加数据库
+//        增加数据库
 //        new Thread(new Runnable() {
 //            @Override
 //            public void run() {
