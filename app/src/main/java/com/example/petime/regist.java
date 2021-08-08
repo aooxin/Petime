@@ -1,8 +1,10 @@
 package com.example.petime;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -73,18 +75,32 @@ public class regist extends AppCompatActivity {
                 } else if (!psw.equals(pswAgain)) {
                     Toast.makeText(regist.this, "输入两次的密码不一样", Toast.LENGTH_SHORT).show();
                     return;
-                    /**
-                     *从SharedPreferences中读取输入的用户名，判断SharedPreferences中是否有此用户名
-                     */
-                } else if (isExistUserName(userName)) {
-                    Toast.makeText(regist.this, "此账户名已经存在", Toast.LENGTH_SHORT).show();
+                } else{
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(DBConnection.link(0, userName, psw) != -1){
+                                Looper.prepare();
+                                Toast.makeText(regist.this, "此账户名已经存在", Toast.LENGTH_SHORT).show();
+                                Looper.loop();
+                                return;
+                            }
+                            else {
+                                DBConnection.link(1, userName, psw);
+                                Looper.prepare();
+                                Toast.makeText(regist.this, "注册成功", Toast.LENGTH_SHORT).show();
+                                regist.this.finish();
+                                Intent i=new Intent(regist.this,login.class);
+                                startActivity(i);
+                                Looper.loop();
+                                //RESULT_OK为Activity系统常量，状态码为-1，
+                                // 表示此页面下的内容操作成功将data返回到上一页面，如果是用back返回过去的则不存在用setResult传递data值
+
+                            }
+                        }
+                    }).start();
                     return;
-                } else {
-                    Toast.makeText(regist.this, "注册成功", Toast.LENGTH_SHORT).show();
-                    DBConnection.link(1, userName, psw);
-                    //RESULT_OK为Activity系统常量，状态码为-1，
-                    // 表示此页面下的内容操作成功将data返回到上一页面，如果是用back返回过去的则不存在用setResult传递data值
-                    regist.this.finish();
+
                 }
             }
         });
@@ -99,16 +115,4 @@ public class regist extends AppCompatActivity {
         pswAgain = et_psw_again.getText().toString().trim();
     }
 
-    /**
-     * 从SharedPreferences中读取输入的用户名，判断SharedPreferences中是否有此用户名
-     */
-    private boolean isExistUserName(String userName) {
-        boolean has_userName = false;
-        int i = 0, j = 0;//判断用户名是否存在
-        j = DBConnection.link(i, userName, "");
-        if (j == -1) {
-            has_userName = true;
-        }
-        return has_userName;
-    }
 }
