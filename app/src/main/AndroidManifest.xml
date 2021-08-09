@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Petime">
         <service
-            android:name=".MyMusicIntentService"
+            android:name=".MyIntentService"
             android:exported="false"></service>
 
         <activity

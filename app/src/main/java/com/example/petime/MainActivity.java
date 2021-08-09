@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private Intent intent_music;
     MediaPlayer mediaPlayer = new MediaPlayer();
     boolean IsFloatButtonVisiblity = true;
+    boolean IsMusicPlaying = false;
 
     @Override
     protected void onDestroy() {
@@ -116,15 +117,23 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Muuuusic Start!", Toast.LENGTH_SHORT).show();
-                // 启动服务播放背景音乐
-                intent_music = new Intent(MainActivity.this, MyIntentService.class);
-                String action = MyIntentService.ACTION_MUSIC;
-                // 设置action
-                intent_music.setAction(action);
+                if (IsMusicPlaying == false) {
+                    Toast.makeText(MainActivity.this, "Muuuusic Start!", Toast.LENGTH_SHORT).show();
+                    // 启动服务播放背景音乐
+                    intent_music = new Intent(MainActivity.this, MyIntentService.class);
+                    String action = MyIntentService.ACTION_MUSIC;
+                    // 设置action
+                    intent_music.setAction(action);
 //                startService(intent_music);
-                mediaPlayer.start();
-                //ChangeFloatButtonVisi();
+                    mediaPlayer.start();
+                    //ChangeFloatButtonVisi();
+                    IsMusicPlaying=true;
+                }
+                else if(IsMusicPlaying==true){
+                    Toast.makeText(MainActivity.this, "Muuuusic Stop!!", Toast.LENGTH_SHORT).show();
+                    mediaPlayer.pause();
+                    IsMusicPlaying=false;
+                }
             }
         });
 
