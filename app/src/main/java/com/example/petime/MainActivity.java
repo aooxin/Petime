@@ -1,6 +1,7 @@
 package com.example.petime;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -28,6 +30,27 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;//qaq why?qaq
+    private Intent intent_music;
+    MediaPlayer mediaPlayer = new MediaPlayer();
+    boolean IsFloatButtonVisiblity = true;
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mediaPlayer.release();
+    }
+
+    public void ChangeFloatButtonVisi() {
+        if (IsFloatButtonVisiblity == true) {
+            ConstraintLayout off = findViewById(R.id.fab);
+            off.setVisibility(View.INVISIBLE);
+            IsFloatButtonVisiblity = false;
+        } else {
+            ConstraintLayout off = findViewById(R.id.fab);
+            off.setVisibility(View.VISIBLE);
+            IsFloatButtonVisiblity = true;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,13 +107,24 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        }).start();
 
-
+        if (mediaPlayer != null) {
+            mediaPlayer = MediaPlayer.create(this
+                    , R.raw.bg);
+        }
         //    添加悬浮按钮的响应(m)
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Fab clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Muuuusic Start!", Toast.LENGTH_SHORT).show();
+                // 启动服务播放背景音乐
+                intent_music = new Intent(MainActivity.this, MyIntentService.class);
+                String action = MyIntentService.ACTION_MUSIC;
+                // 设置action
+                intent_music.setAction(action);
+//                startService(intent_music);
+                mediaPlayer.start();
+                //ChangeFloatButtonVisi();
             }
         });
 

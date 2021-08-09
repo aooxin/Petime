@@ -18,6 +18,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Petime">
+        <service
+            android:name=".MyMusicIntentService"
+            android:exported="false"></service>
+
         <activity
             android:name=".FeedbackActivity2"
             android:exported="true" />
