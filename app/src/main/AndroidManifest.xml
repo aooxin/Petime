@@ -18,6 +18,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Petime">
+        <service
+            android:name=".MyMusicIntentService"
+            android:exported="false"></service>
+
+        <activity
+            android:name=".FeedbackActivity2"
+            android:exported="true" />
         <activity
             android:name=".SettingsActivity"
             android:exported="true"
@@ -43,7 +50,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Petime.NoActionBar"></activity>
+            android:theme="@style/Theme.Petime.NoActionBar" />
         <activity
             android:name=".changeimage"
             android:label="imagechange">

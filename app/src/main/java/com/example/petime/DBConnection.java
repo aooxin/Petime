@@ -8,7 +8,7 @@ import java.sql.Statement;
 public class DBConnection {
     public static int link (int detect,String name,String password2){
         //要连接的数据库url,注意：此处连接的应该是服务器上的MySQl的地址
-        String url = "jdbc:mysql://sh-cynosdbmysql-grp-7whhqd4o.sql.tencentcdb.com:23716/personal_info";
+        String url = "jdbc:mysql://sh-cynosdbmysql-grp-7whhqd4o.sql.tencentcdb.com:23716/personal_info?useSSL=false";
         //连接数据库使用的用户名
         String userName = "root";
         //连接的数据库时使用的密码
@@ -30,10 +30,12 @@ public class DBConnection {
                 //判断用户名是否存在
                 case 0:{
                     Statement st= connection.createStatement();
-                    ResultSet rs = st.executeQuery("select * from Try where name="+name);
+                    ResultSet rs = st.executeQuery("select * from Try where name='"+name+"'");
                     if (rs.next()) {
-                        return -1;
+                        return 1;
                     }
+                    else
+                        return -1;
                 }
                 case 1:{
                     String sql = "insert into Try "+ " values(" + "'" + name + "'" + "," + "'" + password2+ "'" + ")";
@@ -42,7 +44,7 @@ public class DBConnection {
                 }
                 case 2:{
                     Statement st= connection.createStatement();
-                    ResultSet rs = st.executeQuery("select * from Try where name="+name);
+                    ResultSet rs = st.executeQuery("select * from Try where name='"+name+"'");
                     if(rs.next()){
                         if(!rs.getString("password").equals(password2))
                             return -1;
@@ -62,6 +64,7 @@ public class DBConnection {
                 }
             }
         }
+
         return 1;
     }
 }

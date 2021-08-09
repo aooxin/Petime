@@ -1,27 +1,27 @@
 package com.example.petime;
 
-import android.content.ClipData;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.navigation.NavigationView;
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.petime.databinding.ActivityMainBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 /**
  * 这个Activity要实现一个接口，用于响应菜单的单击事件，做出处理
@@ -30,6 +30,27 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;//qaq why?qaq
+    private Intent intent_music;
+    MediaPlayer mediaPlayer = new MediaPlayer();
+    boolean IsFloatButtonVisiblity = true;
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mediaPlayer.release();
+    }
+
+    public void ChangeFloatButtonVisi() {
+        if (IsFloatButtonVisiblity == true) {
+            ConstraintLayout off = findViewById(R.id.fab);
+            off.setVisibility(View.INVISIBLE);
+            IsFloatButtonVisiblity = false;
+        } else {
+            ConstraintLayout off = findViewById(R.id.fab);
+            off.setVisibility(View.VISIBLE);
+            IsFloatButtonVisiblity = true;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent2);
             }
         });
-        //增加数据库
+//        增加数据库
 //        new Thread(new Runnable() {
 //            @Override
 //            public void run() {
@@ -86,13 +107,24 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        }).start();
 
-
+        if (mediaPlayer != null) {
+            mediaPlayer = MediaPlayer.create(this
+                    , R.raw.bg);
+        }
         //    添加悬浮按钮的响应(m)
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Fab clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Muuuusic Start!", Toast.LENGTH_SHORT).show();
+                // 启动服务播放背景音乐
+                intent_music = new Intent(MainActivity.this, MyIntentService.class);
+                String action = MyIntentService.ACTION_MUSIC;
+                // 设置action
+                intent_music.setAction(action);
+//                startService(intent_music);
+                mediaPlayer.start();
+                //ChangeFloatButtonVisi();
             }
         });
 
@@ -123,6 +155,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.right_setting:
                 Intent intent2 = new Intent(MainActivity.this, SettingsActivity.class);
                 item.setIntent(intent2);
+                break;
+            case R.id.r_suggestion:
+                Intent intent3 = new Intent(MainActivity.this, FeedbackActivity2.class);
+                item.setIntent(intent3);
                 break;
             default:
                 Toast.makeText(MainActivity.this, "You click Button 1", Toast.LENGTH_SHORT).show();

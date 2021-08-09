@@ -7,7 +7,7 @@
         android:title="设置"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_2"
+        android:id="@+id/r_suggestion"
         android:orderInCategory="100"
         android:title="使用反馈"
         app:showAsAction="never" />
