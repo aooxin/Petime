@@ -1,5 +1,21 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:title="@string/action_settings">
 
+    <PreferenceCategory>
+        <Preference
+            app:icon="@mipmap/ic_launcher"
+            app:key="key_pre"
+            app:title="Preference">
+            <intent
+                android:action="ACTION_A_INTENT"
+                android:targetClass="com.example.petime.login"
+                android:targetPackage="com.example.petime">
+            </intent>
+        </Preference>
+
+
+    </PreferenceCategory>
     <PreferenceCategory app:title="@string/personal_info_setting">
 
         <!--        <EditTextPreference-->

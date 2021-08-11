@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private Intent intent_music;
     MediaPlayer mediaPlayer = new MediaPlayer();
     boolean IsFloatButtonVisiblity = true;
+    boolean IsMusicPlaying = false;
 
     @Override
     protected void onDestroy() {
@@ -116,15 +117,23 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Muuuusic Start!", Toast.LENGTH_SHORT).show();
-                // 启动服务播放背景音乐
-                intent_music = new Intent(MainActivity.this, MyIntentService.class);
-                String action = MyIntentService.ACTION_MUSIC;
-                // 设置action
-                intent_music.setAction(action);
+                if (IsMusicPlaying == false) {
+                    Toast.makeText(MainActivity.this, "Muuuusic Start!", Toast.LENGTH_SHORT).show();
+                    // 启动服务播放背景音乐
+                    intent_music = new Intent(MainActivity.this, MyIntentService.class);
+                    String action = MyIntentService.ACTION_MUSIC;
+                    // 设置action
+                    intent_music.setAction(action);
 //                startService(intent_music);
-                mediaPlayer.start();
-                //ChangeFloatButtonVisi();
+                    mediaPlayer.start();
+                    //ChangeFloatButtonVisi();
+                    IsMusicPlaying=true;
+                }
+                else if(IsMusicPlaying==true){
+                    Toast.makeText(MainActivity.this, "Muuuusic Stop!!", Toast.LENGTH_SHORT).show();
+                    mediaPlayer.pause();
+                    IsMusicPlaying=false;
+                }
             }
         });
 
@@ -152,10 +161,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, study.class);
                 item.setIntent(intent);
                 break;
-            case R.id.right_setting:
-                Intent intent2 = new Intent(MainActivity.this, SettingsActivity.class);
-                item.setIntent(intent2);
-                break;
+//            case R.id.right_setting:
+//                Intent intent2 = new Intent(MainActivity.this, SettingsActivity.class);
+//                item.setIntent(intent2);
+//                break;
             case R.id.r_suggestion:
                 Intent intent3 = new Intent(MainActivity.this, FeedbackActivity2.class);
                 item.setIntent(intent3);
