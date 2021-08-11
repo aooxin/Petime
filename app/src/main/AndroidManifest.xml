@@ -18,6 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Petime">
+
         <service
             android:name=".MyIntentService"
             android:exported="false"></service>
@@ -25,10 +26,11 @@
         <activity
             android:name=".FeedbackActivity2"
             android:exported="true" />
-        <activity
-            android:name=".SettingsActivity"
-            android:exported="true"
-            android:label="@string/title_activity_settings" />
+<!--        <activity-->
+<!--            android:name=".SettingsActivity"-->
+<!--            android:exported="true"-->
+<!--            android:label="@string/title_activity_settings" />-->
+
         <activity
             android:name=".CountDownView"
             android:exported="true"

@@ -161,10 +161,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, study.class);
                 item.setIntent(intent);
                 break;
-            case R.id.right_setting:
-                Intent intent2 = new Intent(MainActivity.this, SettingsActivity.class);
-                item.setIntent(intent2);
-                break;
+//            case R.id.right_setting:
+//                Intent intent2 = new Intent(MainActivity.this, SettingsActivity.class);
+//                item.setIntent(intent2);
+//                break;
             case R.id.r_suggestion:
                 Intent intent3 = new Intent(MainActivity.this, FeedbackActivity2.class);
                 item.setIntent(intent3);
