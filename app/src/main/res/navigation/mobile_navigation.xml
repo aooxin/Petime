@@ -23,9 +23,9 @@
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
 
-    <fragment
+    <activity
         android:id="@+id/nav_setting"
-        android:name="com.example.petime.ui.setting.SettingFragment"
-        android:label="Setting"
-        tools:layout="@layout/fragment_setting" />
+        android:name="com.example.petime.SettingsActivity"
+        android:label="SettingsActivity" />
+
 </navigation>

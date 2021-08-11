@@ -5,13 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints"
-        android:marginLeft="200dp"
-        android:text="意见反馈"/>
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/feedback_sumit_layout"
         android:layout_width="match_parent"
