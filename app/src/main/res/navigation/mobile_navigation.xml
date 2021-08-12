@@ -12,11 +12,6 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.petime.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
-    <fragment
         android:id="@+id/nav_setting"
         android:name="com.example.petime.SettingsFragment"
         android:label="@string/action_settings" />
@@ -25,5 +20,11 @@
         android:id="@+id/nav_pet"
         android:name="com.example.petime.pethouse_activity"
         android:label="pethouse_activity" />
+
+    <fragment
+        android:id="@+id/nav_slideshow"
+        android:name="com.example.petime.SocietyItemFragment"
+        android:label="fragment_item_list"
+        tools:layout="@layout/fragment_item_list" />
 
 </navigation>

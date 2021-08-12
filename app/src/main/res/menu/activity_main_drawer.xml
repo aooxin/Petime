@@ -7,16 +7,16 @@
 <!--        header_layout在layout那里-->
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_study"
             android:title="function1" />
         <item
             android:id="@+id/nav_pet"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_pet"
             android:title="pet house" />
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="function3" />
+            android:icon="@drawable/ic_friends_society"
+            android:title="@string/society" />
         <item
             android:id="@+id/nav_setting"
             android:icon="@drawable/setting"
