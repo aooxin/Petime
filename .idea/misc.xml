@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.3314814814814815" />
+        <entry key="app/src/main/res/drawable/ic_pet.xml" value="0.30648148148148147" />
+        <entry key="app/src/main/res/drawable/ic_study.xml" value="0.30648148148148147" />
         <entry key="app/src/main/res/layout/activity_clock.xml" value="0.346875" />
         <entry key="app/src/main/res/layout/activity_count_down_view.xml" value="0.346875" />
         <entry key="app/src/main/res/layout/activity_feedback2.xml" value="0.346875" />
@@ -13,8 +15,13 @@
         <entry key="app/src/main/res/layout/content_main.xml" value="0.16869300911854104" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.12907608695652173" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.12907608695652173" />
+        <entry key="app/src/main/res/layout/fragment_item.xml" value="0.346875" />
+        <entry key="app/src/main/res/layout/fragment_item_list.xml" value="0.32760416666666664" />
+        <entry key="app/src/main/res/layout/fragment_scrolling.xml" value="0.346875" />
         <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.16869300911854104" />
+        <entry key="app/src/main/res/layout/login.xml" value="0.346875" />
         <entry key="app/src/main/res/layout/main_title_bar.xml" value="0.346875" />
+        <entry key="app/src/main/res/layout/pet_house.xml" value="0.346875" />
         <entry key="app/src/main/res/layout/settings_activity.xml" value="0.346875" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.3415384615384615" />
         <entry key="app/src/main/res/menu/main.xml" value="0.196875" />
