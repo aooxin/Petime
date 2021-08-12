@@ -10,9 +10,9 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="function1" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_pet"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="function2" />
+            android:title="pet house" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
