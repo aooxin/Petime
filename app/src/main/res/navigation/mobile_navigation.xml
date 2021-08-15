@@ -26,5 +26,10 @@
         android:name="com.example.petime.SocietyItemFragment"
         android:label="fragment_item_list"
         tools:layout="@layout/fragment_item_list" />
+    <activity
+        android:id="@+id/nav_study"
+        android:name="com.example.petime.study"
+        android:label="activity_study"
+        tools:layout="@layout/activity_study" />
 
 </navigation>

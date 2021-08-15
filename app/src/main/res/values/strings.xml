@@ -1,11 +1,8 @@
 <resources>
     <string name="app_name">Petime</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">设置</string>
+
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
@@ -16,25 +13,19 @@
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
     <string name="settings_key">settings_key</string>
+
     <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
 
     <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <!-- Setting -->
     <string name="personal_info_setting">个人信息设置</string>
     <string name="sex">性别</string>
     <string name="Study_Setting">学习计时设置</string>
     <string name="keep_screen_open">保持屏幕开启</string>
     <string name="close_app_pet_sick">关闭应用宠物生病</string>
-    <string name="diy_encourage_saying">自定鼓励语句</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 <!--  SocietyFargment  -->
     <string name="society">我的好友</string>
+
 </resources>
