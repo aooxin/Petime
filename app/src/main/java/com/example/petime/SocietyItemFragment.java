@@ -2,17 +2,16 @@ package com.example.petime;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.petime.placeholder.PlaceholderContent;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -24,6 +23,8 @@ public class SocietyItemFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
 
+    private List<SocietyData> societyDataList = new ArrayList<SocietyData>();
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -32,7 +33,7 @@ public class SocietyItemFragment extends Fragment {
     }
 
     // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
+
     public static SocietyItemFragment newInstance(int columnCount) {
         SocietyItemFragment fragment = new SocietyItemFragment();
         Bundle args = new Bundle();
@@ -44,9 +45,17 @@ public class SocietyItemFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        initData();
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+        }
+
+    }
+
+    private void initData() {
+        for (int i = 0; i < 2; i++) {
+            SocietyData zhangsan = new SocietyData("zhangsan", 10086);
+            societyDataList.add(zhangsan);
         }
     }
 
@@ -54,17 +63,20 @@ public class SocietyItemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
-
+//initData();
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new MySocietyItemRecyclerViewAdapter(PlaceholderContent.ITEMS));
+//            if (mColumnCount <= 1) {
+//                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+//            } else {
+//                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+//            }
+            recyclerView.setLayoutManager(new GridLayoutManager(context, societyDataList.size()));
+            //recyclerView.setLayoutManager(new LinearLayoutManager(context));
+            MySocietyItemRecyclerViewAdapter adapter = new MySocietyItemRecyclerViewAdapter(societyDataList);
+            recyclerView.setAdapter(adapter);
         }
         return view;
     }
