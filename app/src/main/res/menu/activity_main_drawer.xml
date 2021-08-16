@@ -10,6 +10,10 @@
             android:icon="@drawable/ic_study"
             android:title="function1" />
         <item
+            android:id="@+id/nav_study"
+            android:icon="@drawable/ic_learn1"
+            android:title="学习" />
+        <item
             android:id="@+id/nav_pet"
             android:icon="@drawable/ic_pet"
             android:title="pet house" />

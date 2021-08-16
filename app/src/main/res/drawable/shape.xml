@@ -4,4 +4,5 @@
 
         <corners android:radius="5dp"/>   <!-- 设置圆角弧度 -->
         <stroke android:color="@color/purple_200" android:width="5dp"/> <!-- 设置边框颜色以及宽度 -->
+        <solid android:color="#DDDAAA"></solid>
 </shape>

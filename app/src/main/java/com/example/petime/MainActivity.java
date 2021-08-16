@@ -157,11 +157,7 @@ public class MainActivity extends AppCompatActivity {
     //当菜单被选择的时候,在OnOptionsItemSelected()方法中实现.
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {//获取菜单id
-            case R.id.study:
-                Intent intent = new Intent(MainActivity.this, study.class);
-                item.setIntent(intent);
-                break;
-//            case R.id.right_setting:
+//          case R.id.right_setting:
 //                Intent intent2 = new Intent(MainActivity.this, SettingsActivity.class);
 //                item.setIntent(intent2);
 //                break;
