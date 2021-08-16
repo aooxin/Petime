@@ -1,97 +1,91 @@
 package com.example.petime;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Dialog;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.SlidingDrawer;
 
-import com.airbnb.lottie.Lottie;
-import com.airbnb.lottie.LottieAnimationView;
+import java.util.List;
 
-//public class pethouse_activity extends AppCompatActivity {
-//
-//    LottieAnimationView lottie;
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.pet_house);
-//
-//        lottie=findViewById(R.id.lottie);
-////        lottie.animate().translationX(2000).setDuration(2000).setStartDelay(2900);
-//
-//    }
-//}
-public class pethouse_activity extends AppCompatActivity implements View.OnClickListener {
-    private Button btn_bottom_dialog;
-
+public class pethouse_activity extends Activity {
+    private GridView gv;
+    private SlidingDrawer sd;
+    private ImageView iv;
+    private List<ResolveInfo> apps;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pet_house);
-        btn_bottom_dialog = (Button) findViewById(R.id.choose_pet);
+        loadApps();
+        gv = (GridView) findViewById(R.id.allApps);
+        sd = (SlidingDrawer) findViewById(R.id.sliding);
+        iv = (ImageView) findViewById(R.id.imageViewIcon);
+        gv.setAdapter(new GridAdapter());
+        sd.setOnDrawerOpenListener(new SlidingDrawer.OnDrawerOpenListener()// 开抽屉
+        {
+            @Override
+            public void onDrawerOpened() {
+                iv.setImageResource(R.drawable.pet1);// 响应开抽屉事件
+                // ，把图片设为向下的
+            }
+        });
+        sd.setOnDrawerCloseListener(new SlidingDrawer.OnDrawerCloseListener() {
+            @Override
+            public void onDrawerClosed() {
+                iv.setImageResource(R.drawable.pet1);// 响应关抽屉事件
+            }
+        });
 
-        btn_bottom_dialog.setOnClickListener(this);
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.choose_pet:
-                setDialog();
-                break;
-            case R.id.lottie:
-                Toast.makeText(this, "选择cat", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.lottie1:
-                Toast.makeText(this, "选择rabbit", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.lottie2:
-                Toast.makeText(this, "选择unicorn", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.lottie3:
-                Toast.makeText(this, "选择dog", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.lottie4:
-                Toast.makeText(this, "选择fox", Toast.LENGTH_SHORT).show();
-                break;
+    private void loadApps() {
+        Intent intent = new Intent(Intent.ACTION_MAIN, null);
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+        apps = getPackageManager().queryIntentActivities(intent, 0);
+    }
+
+    public class GridAdapter extends BaseAdapter {
+        public GridAdapter() {
 
         }
+
+        public int getCount() {
+            // TODO Auto-generated method stub
+            return apps.size();
+        }
+
+        public Object getItem(int position) {
+            // TODO Auto-generated method stub
+            return apps.get(position);
+        }
+
+        public long getItemId(int position) {
+            // TODO Auto-generated method stub
+            return position;
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent) {
+            // TODO Auto-generated method stub
+            ImageView imageView = null;
+            if (convertView == null) {
+                imageView = new ImageView(pethouse_activity.this);
+                imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                imageView.setLayoutParams(new GridView.LayoutParams(50, 50));
+            } else {
+                imageView = (ImageView) convertView;
+            }
+            ResolveInfo ri = apps.get(position);
+            imageView.setImageDrawable(ri.activityInfo
+                    .loadIcon(getPackageManager()));
+            return imageView;
+        }
+
     }
 
-    private void setDialog() {
-        Dialog mCameraDialog = new Dialog(this, R.style.BottomDialog);
-        LinearLayout root = (LinearLayout) LayoutInflater.from(this).inflate(
-                R.layout.pet_house, null);
-        //初始化视图
-        root.findViewById(R.id.lottie).setOnClickListener(this);
-        root.findViewById(R.id.lottie1).setOnClickListener(this);
-        root.findViewById(R.id.lottie2).setOnClickListener(this);
-        root.findViewById(R.id.lottie3).setOnClickListener(this);
-        root.findViewById(R.id.lottie4).setOnClickListener(this);
-        mCameraDialog.setContentView(root);
-        Window dialogWindow = mCameraDialog.getWindow();
-        dialogWindow.setGravity(Gravity.BOTTOM);
-//        dialogWindow.setWindowAnimations(R.style.dialogstyle); // 添加动画
-        WindowManager.LayoutParams lp = dialogWindow.getAttributes(); // 获取对话框当前的参数值
-        lp.x = 0; // 新位置X坐标
-        lp.y = 0; // 新位置Y坐标
-        lp.width = (int) getResources().getDisplayMetrics().widthPixels; // 宽度
-        root.measure(0, 0);
-        lp.height = root.getMeasuredHeight();
-
-        lp.alpha = 9f; // 透明度
-        dialogWindow.setAttributes(lp);
-        mCameraDialog.show();
-    }
 }

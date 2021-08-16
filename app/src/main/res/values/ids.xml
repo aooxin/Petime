@@ -12,5 +12,8 @@
     <item name="todo_4" type="id"/>
     <item name="todo_5" type="id"/>
     <item name="todo_6" type="id"/>
+    <item name="sliding" type="id" />
+    <item name="allApps" type="id" />
+    <item name="imageViewIcon" type="id" />
 
 </resources>
