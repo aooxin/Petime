@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +47,8 @@ public class study extends AppCompatActivity {
     private int name_id=3000;
     static int time=0;
     static int count=1;
+    private PopupWindow popWindow;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +68,6 @@ public class study extends AppCompatActivity {
             case android.R.id.home:
                 this.finish(); // back button
                 break;
-
         }
         return super.onOptionsItemSelected(item);
     }
@@ -117,19 +119,7 @@ public class study extends AppCompatActivity {
                 textView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        LinearLayout ly1=(LinearLayout)inflater.inflate(R.layout.clockpopup,linearLayout,false).findViewById(R.id.clock_popup);
-                        linearLayout.addView(ly1);
-                        Button OK=(Button)findViewById(R.id.OK);
-                        EditText ed_time=(EditText)findViewById(R.id.time);
-                        EditText ed_title=(EditText)findViewById(R.id.title);
-                        OK.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                textView.setText(ed_time.getText().toString()+"分钟");
-                                textname.setText(ed_title.getText());
-                                linearLayout.removeView(ly1);
-                            }
-                        });
+                        showPopupWindow();
                     }
                 });
             }
@@ -149,6 +139,31 @@ public class study extends AppCompatActivity {
             }
         });
 
+    }
+    private void showPopupWindow() {
+        //设置contentView
+        View contentView = LayoutInflater.from(study.this).inflate(R.layout.clockpopup, null);
+        popWindow = new PopupWindow(contentView,
+                650, 590, true);
+        popWindow.setContentView(contentView);
+        Button OK=(Button)contentView.findViewById(R.id.OK);
+        EditText ed_time=(EditText)contentView.findViewById(R.id.time);
+        EditText ed_title=(EditText)contentView.findViewById(R.id.title);
+        OK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(ed_time.getText().toString().equals(""))
+                {textView.setText(20+"分钟");}
+                else
+                    textView.setText(ed_time.getText().toString()+"分钟");
+                if(ed_title.getText().toString().equals("")){textname.setText("Untitle");}
+                else
+                    textname.setText(ed_title.getText());
+                popWindow.dismiss();
+            }
+        });
+        View rootview = LayoutInflater.from(study.this).inflate(R.layout.activity_study, null);
+        popWindow.showAtLocation(rootview, Gravity.CENTER, 0, 0);
     }
 
 }

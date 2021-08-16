@@ -11,10 +11,5 @@
         android:orderInCategory="100"
         android:title="使用反馈"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/study"
-        android:icon="@drawable/setting"
-        android:title="study"
-        />
 
 </menu>
