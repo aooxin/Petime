@@ -15,5 +15,6 @@
     <item name="sliding" type="id" />
     <item name="allApps" type="id" />
     <item name="imageViewIcon" type="id" />
+    <item name="content_pet" type="id" />
 
 </resources>
