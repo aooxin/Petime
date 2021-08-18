@@ -1,76 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/back"
-    tools:context=".pethouse_activity"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:paddingBottom="20dp"
-    android:paddingLeft="22.5dp"
-    android:paddingRight="22.5dp"
-    android:paddingTop="20dp"    >
-
-    <Button
-        android:id="@+id/choose_pet"
+    android:background="@drawable/back2">
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="choose_pet"
-        android:layout_marginLeft="120dp"
-        android:layout_marginTop="500dp"
-        android:background="@color/white"
-        android:textColor="@color/black" />
+        android:layout_marginTop="45dp"
+        android:text="Welcom to my pet house!"
+        android:textStyle="bold"
+        android:textColor="@color/cornflowerblue"
+        android:orientation="vertical"
+        android:textSize="35dp"/>
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_marginLeft="120dp"
-        android:layout_marginTop="135dp"
-        android:elevation="5dp"
-        app:lottie_loop="true"
-        app:lottie_autoPlay="true"
-        app:lottie_rawRes="@raw/cat" />
+    android:id="@+id/lottie"
+    android:layout_width="330dp"
+    android:layout_height="300dp"
+    android:layout_marginLeft="40dp"
+    android:layout_marginTop="-5dp"
+    android:elevation="5dp"
+    app:lottie_autoPlay="true"
+    app:lottie_loop="true"  />
+<!--    app:lottie_rawRes="@raw/cat" -->
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie1"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:elevation="5dp"
-        android:layout_marginLeft="240dp"
-        app:lottie_loop="true"
-        app:lottie_autoPlay="true"
-        app:lottie_rawRes="@raw/rabbit" />
+    <SlidingDrawer
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-50dp"
+        android:handle="@+id/handle"
+        android:content="@+id/content_pet"
+        android:orientation="vertical"
+        android:id="@+id/slidingdrawer">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie2"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="270dp"
-        android:elevation="5dp"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/unicorn" />
+        <ImageButton
+            android:id="@id/handle"
+            android:layout_width="50dip"
+            android:layout_height="44dip"
+            android:src="@drawable/ic_pet" />
+        <LinearLayout
+            android:id="@id/content_pet"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/back1"
+            android:orientation="horizontal"
+            >
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottie_cat"
+                android:layout_width="133dp"
+                android:layout_height="133dp"
+                android:elevation="5dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/cat" />
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottie_dog"
+                android:layout_width="133dp"
+                android:layout_height="133dp"
+                android:elevation="5dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/dog" />
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottie_fox"
+                android:layout_width="133dp"
+                android:layout_height="133dp"
+                android:elevation="5dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/fox" />
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottie_unicorn"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="150dp"
+                android:layout_marginLeft="-380dp"
+                android:elevation="5dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/unicorn" />
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottie_rabbit"
+                android:layout_width="133dp"
+                android:layout_height="133dp"
+                android:layout_marginLeft="13dp"
+                android:layout_marginTop="135dp"
+                android:elevation="5dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/rabbit" />
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottie_squirrel"
+                android:layout_width="133dp"
+                android:layout_height="133dp"
+                android:layout_marginTop="135dp"
+                android:elevation="5dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/squirrel" />
+        </LinearLayout>
+    </SlidingDrawer>
+</LinearLayout>
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie3"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_marginLeft="240dp"
-        android:layout_marginTop="270dp"
-        android:elevation="5dp"
-        app:lottie_loop="true"
-        app:lottie_autoPlay="true"
-        app:lottie_rawRes="@raw/dog" />
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie4"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:elevation="5dp"
-        app:lottie_loop="true"
-        app:lottie_autoPlay="true"
-        app:lottie_rawRes="@raw/fox" />
-</RelativeLayout>
