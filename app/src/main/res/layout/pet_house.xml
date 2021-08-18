@@ -15,22 +15,51 @@
         android:textColor="@color/cornflowerblue"
         android:orientation="vertical"
         android:textSize="35dp"/>
-
+    <Button
+        android:id="@+id/buttonFood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/indianred"
+        android:text="补充能量"
+        android:textSize="30dp"
+        android:layout_marginLeft="20dp"/>
     <com.airbnb.lottie.LottieAnimationView
     android:id="@+id/lottie"
     android:layout_width="330dp"
     android:layout_height="300dp"
     android:layout_marginLeft="40dp"
-    android:layout_marginTop="-5dp"
+    android:layout_marginTop="-80dp"
     android:elevation="5dp"
     app:lottie_autoPlay="true"
     app:lottie_loop="true"  />
 <!--    app:lottie_rawRes="@raw/cat" -->
+    <TextView
+        android:id="@+id/myTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dip"
+        android:text=""
+        android:textSize="35dp"
+        android:textColor="@color/mediumslateblue"
+        android:textStyle="bold" />
+    <SeekBar
+        android:id="@+id/mySeekBar"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp" />
+    <TextView
+        android:id="@+id/award"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dip"
+        android:text=""
+        android:textSize="35dp"
+        android:textColor="@color/royalblue"
+        android:textStyle="bold" />
 
     <SlidingDrawer
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="-50dp"
+        android:layout_marginTop="-250dp"
         android:handle="@+id/handle"
         android:content="@+id/content_pet"
         android:orientation="vertical"
