@@ -74,3 +74,9 @@ public class Data extends Application {
         super.onCreate();
     }
 }
+ class Exp{
+    private static int exp=0;
+    public void exp_add(int time){
+        this.exp+=time;
+    }
+ }
