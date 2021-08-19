@@ -2,8 +2,10 @@ package com.example.petime;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActivityManager;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.MediaPlayer;
@@ -28,10 +30,11 @@ public class clock extends AppCompatActivity {
     TextView textView;
     MediaPlayer mediaPlayer;
     private PopupWindow mPopWindow;
+    Exp exp1;
     private TextView last;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        exp1=new Exp();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clock);
         Intent intent = getIntent();
@@ -41,12 +44,19 @@ public class clock extends AppCompatActivity {
         final LayoutInflater inflater1 = LayoutInflater.from(this);
         CountDownView ly = (CountDownView) inflater1.inflate(R.layout.activity_count_down_view, clockout, false).findViewById(R.id.CountDownView);
         ImageButton btn=(ImageButton)findViewById(R.id.music);
+        ImageButton btn2=(ImageButton)findViewById(R.id.stopclock);
         btn.setOnClickListener(new View.OnClickListener() {
                                    @Override
                                    public void onClick(View v) {
                                        showPopupWindow();
                                    }
                                });
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAlterDialog(ly);
+            }
+        });
         ly.mCountdownTime=time;
         clockout.addView(ly);
         ly.setAddCountDownListener(new CountDownView.OnCountDownFinishListener() {
@@ -57,6 +67,7 @@ public class clock extends AppCompatActivity {
                 if(mediaPlayer!=null){
                     mediaPlayer.stop();
                     mediaPlayer.reset();}
+                exp1.exp_add(time);
             }
         });
         ly.startCountDown();
@@ -129,4 +140,40 @@ public class clock extends AppCompatActivity {
         }
         return mediaPlayer;
     }
+
+    private void showAlterDialog(CountDownView ly){
+        final AlertDialog.Builder alterDiaglog = new AlertDialog.Builder(clock.this);
+        alterDiaglog.setIcon(R.drawable.pet1);//图标
+        alterDiaglog.setTitle("小贴士");//文字
+        alterDiaglog.setMessage("提前结束将失去经验值哦");//提示消息
+        //积极的选择
+        alterDiaglog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(clock.this,"学习已提前结束",Toast.LENGTH_SHORT).show();
+                finish();
+                if(mediaPlayer!=null){
+                    mediaPlayer.stop();
+                    mediaPlayer.reset();}
+                ly.setAddCountDownListener(new CountDownView.OnCountDownFinishListener() {
+                    @Override
+                    public void countDownFinished() {
+                    }
+                });
+            }
+        });
+        //消极的选择
+        alterDiaglog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                alterDiaglog.show().dismiss();
+            }
+        });
+
+
+        //显示
+        alterDiaglog.show();
+    }
 }
+
+

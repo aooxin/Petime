@@ -38,7 +38,8 @@ public class DBConnection {
                         return -1;
                 }
                 case 1:{
-                    String sql = "insert into Try "+ " values(" + "'" + name + "'" + "," + "'" + password2+ "'" + ")";
+                    String sql = "insert into Try "+ " values(" + "'" + name + "'" + "," + "'" + password2+ "'"
+                            +",'60','60','60','60','60','60','100')";
                     PreparedStatement ps = connection.prepareStatement(sql);
                     ps.execute(sql);
                 }
@@ -48,6 +49,16 @@ public class DBConnection {
                     if(rs.next()){
                         if(!rs.getString("password").equals(password2))
                             return -1;
+                        else{
+                            final Data data_pet = new Data();
+                            data_pet.setData_cat(rs.getInt("cat"));
+                            data_pet.setData_dog(rs.getInt("dog"));
+                            data_pet.setData_unicorn(rs.getInt("unicorn"));
+                            data_pet.setData_rabbit(rs.getInt("rabbit"));
+                            data_pet.setData_squirrel(rs.getInt("squirrel"));
+                            data_pet.setData_fox(rs.getInt("fox"));
+                            data_pet.setArwad(rs.getInt("award"));
+                        }
                     }
                 }
             }

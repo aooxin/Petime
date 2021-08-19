@@ -3,9 +3,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.SlidingDrawer;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +19,10 @@ public class pethouse_activity extends Activity {
     private ImageButton imbg;
     private Boolean flag=false;
     private LinearLayout linearLayout;
+    private SeekBar seek;
+    private TextView myTextView;
+    private TextView award;
+    private int award_data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -45,6 +51,12 @@ public class pethouse_activity extends Activity {
 
         });
 
+        final Data data=new Data();
+        award_data=data.getArwad();
+        award=findViewById(R.id.award);
+        award.setText("能量值为:"+award_data);
+        myTextView = (TextView) findViewById(R.id.myTextView);
+        seek = (SeekBar) findViewById(R.id.mySeekBar);
         linearLayout=(LinearLayout)findViewById(R.id.content_pet);
 //        LottieAnimationView lottie_cat=(LottieAnimationView )linearLayout.findViewById(R.id.lottie_cat);
         LottieAnimationView lottie_cat=(LottieAnimationView )findViewById(R.id.lottie_cat);
@@ -53,7 +65,19 @@ public class pethouse_activity extends Activity {
             public void onClick(View view) {
                 Toast.makeText(pethouse_activity.this, "You choose cat", Toast.LENGTH_SHORT).show();
                 LottieAnimationView lottie=(LottieAnimationView )findViewById(R.id.lottie);
-//                lottie.setImageAssetsFolder("/home/wufang/androidpetime/Petime/app/src/main/res/raw");
+                myTextView.setText("宠物心情值为: " + data.getData_cat());
+                seek.setProgress(data.getData_cat());
+                Button button=findViewById(R.id.buttonFood);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        award_data-=10;
+                        award.setText("能量值为:"+award_data);
+                        data.setData_cat(data.getData_cat()+10);
+                        myTextView.setText("宠物心情值为: " + data.getData_cat());
+                        seek.setProgress(data.getData_cat());
+                    }
+                });
                 lottie.setAnimation("cat.json");
                 lottie.playAnimation();
             }
@@ -63,8 +87,20 @@ public class pethouse_activity extends Activity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(pethouse_activity.this, "You choose rabbit", Toast.LENGTH_SHORT).show();
+                myTextView.setText("宠物心情值为: " + data.getData_rabbit());
+                seek.setProgress(data.getData_rabbit());
                 LottieAnimationView lottie=(LottieAnimationView )findViewById(R.id.lottie);
-//                lottie.setImageAssetsFolder("/home/wufang/androidpetime/Petime/app/src/main/res/raw");
+                Button button=findViewById(R.id.buttonFood);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        award_data-=10;
+                        award.setText("能量值为:"+award_data);
+                        data.setData_rabbit(data.getData_rabbit()+10);
+                        myTextView.setText("宠物心情值为: " + data.getData_rabbit());
+                        seek.setProgress(data.getData_rabbit());
+                    }
+                });
                 lottie.setAnimation("rabbit.json");
                 lottie.playAnimation();
             }
@@ -75,7 +111,19 @@ public class pethouse_activity extends Activity {
             public void onClick(View view) {
                 Toast.makeText(pethouse_activity.this, "You choose fox", Toast.LENGTH_SHORT).show();
                 LottieAnimationView lottie=(LottieAnimationView )findViewById(R.id.lottie);
-//                lottie.setImageAssetsFolder("/home/wufang/androidpetime/Petime/app/src/main/res/raw");
+                myTextView.setText("宠物心情值为: " + data.getData_fox());
+                seek.setProgress(data.getData_fox());
+                Button button=findViewById(R.id.buttonFood);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        award_data-=10;
+                        award.setText("能量值为:"+award_data);
+                        data.setData_fox(data.getData_rabbit()+10);
+                        myTextView.setText("宠物心情值为: " + data.getData_fox());
+                        seek.setProgress(data.getData_fox());
+                    }
+                });
                 lottie.setAnimation("fox.json");
                 lottie.playAnimation();
             }
@@ -86,7 +134,19 @@ public class pethouse_activity extends Activity {
             public void onClick(View view) {
                 Toast.makeText(pethouse_activity.this, "You choose dog", Toast.LENGTH_SHORT).show();
                 LottieAnimationView lottie=(LottieAnimationView )findViewById(R.id.lottie);
-//                lottie.setImageAssetsFolder("/home/wufang/androidpetime/Petime/app/src/main/res/raw");
+                myTextView.setText("宠物心情值为: " + data.getData_dog());
+                seek.setProgress(data.getData_dog());
+                Button button=findViewById(R.id.buttonFood);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        award_data-=10;
+                        award.setText("能量值为:"+award_data);
+                        data.setData_dog(data.getData_dog()+10);
+                        myTextView.setText("宠物心情值为: " + data.getData_dog());
+                        seek.setProgress(data.getData_dog());
+                    }
+                });
                 lottie.setAnimation("dog.json");
                 lottie.playAnimation();
             }
@@ -97,7 +157,19 @@ public class pethouse_activity extends Activity {
             public void onClick(View view) {
                 Toast.makeText(pethouse_activity.this, "You choose unicorn", Toast.LENGTH_SHORT).show();
                 LottieAnimationView lottie=(LottieAnimationView )findViewById(R.id.lottie);
-//                lottie.setImageAssetsFolder("/home/wufang/androidpetime/Petime/app/src/main/res/raw");
+                myTextView.setText("宠物心情值为: " + data.getData_unicorn());
+                seek.setProgress(data.getData_unicorn());
+                Button button=findViewById(R.id.buttonFood);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        award_data-=10;
+                        award.setText("能量值为:"+award_data);
+                        data.setData_unicorn(data.getData_rabbit()+10);
+                        myTextView.setText("宠物心情值为: " + data.getData_unicorn());
+                        seek.setProgress(data.getData_unicorn());
+                    }
+                });
                 lottie.setAnimation("unicorn.json");
                 lottie.playAnimation();
             }
@@ -108,7 +180,19 @@ public class pethouse_activity extends Activity {
             public void onClick(View view) {
                 Toast.makeText(pethouse_activity.this, "You choose squirrel", Toast.LENGTH_SHORT).show();
                 LottieAnimationView lottie=(LottieAnimationView )findViewById(R.id.lottie);
-//                lottie.setImageAssetsFolder("/home/wufang/androidpetime/Petime/app/src/main/res/raw");
+                myTextView.setText("宠物心情值为: " + data.getData_squirrel());
+                seek.setProgress(data.getData_squirrel());
+                Button button=findViewById(R.id.buttonFood);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        award_data-=10;
+                        award.setText("能量值为:"+award_data);
+                        data.setData_squirrel(data.getData_rabbit()+10);
+                        myTextView.setText("宠物心情值为: " + data.getData_squirrel());
+                        seek.setProgress(data.getData_squirrel());
+                    }
+                });
                 lottie.setAnimation("squirrel.json");
                 lottie.playAnimation();
             }

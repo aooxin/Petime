@@ -12,17 +12,33 @@
         android:id="@+id/clockout"
         android:orientation="vertical"
         android:layout_weight="1"></LinearLayout>
-    <LinearLayout
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:orientation="horizontal"
-        android:layout_gravity="center">
-    <ImageButton
-        android:id="@+id/music"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:src="@drawable/ic_channel_foreground"></ImageButton>
-    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:padding="10dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="80dp">
+                <ImageButton
+                    android:id="@+id/music"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/ic_channel_foreground"></ImageButton>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="80dp">
+                <ImageButton
+                    android:id="@+id/stopclock"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_stop_foreground"></ImageButton>
+            </LinearLayout>
+        </LinearLayout>
 </LinearLayout>

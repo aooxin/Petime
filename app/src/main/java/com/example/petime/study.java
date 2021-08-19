@@ -48,11 +48,9 @@ public class study extends AppCompatActivity {
     static int time=0;
     static int count=1;
     private PopupWindow popWindow;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setHomeButtonEnabled(true);
