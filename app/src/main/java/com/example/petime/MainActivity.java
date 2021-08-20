@@ -57,8 +57,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        Intent intent = new Intent(MainActivity.this, login.class);
-        startActivity(intent);
+        //Intent intent = new Intent(MainActivity.this, login.class);
+        //startActivity(intent);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
