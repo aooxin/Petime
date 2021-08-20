@@ -79,4 +79,7 @@ public class Data extends Application {
     public void exp_add(int time){
         this.exp+=time;
     }
+     public int getExp(){
+         return exp;
+     }
  }
