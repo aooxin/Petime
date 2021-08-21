@@ -23,7 +23,13 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.time.Clock;
 
 public class clock extends AppCompatActivity {
@@ -68,6 +74,62 @@ public class clock extends AppCompatActivity {
                     mediaPlayer.stop();
                     mediaPlayer.reset();}
                 exp1.exp_add(time);
+                new Thread(new Runnable() {
+                    private String username;
+                    @Override
+                    public void run() {
+                        File file = new File("name.txt");
+                        BufferedReader reader = null;
+                        try {
+                            reader = new BufferedReader(new FileReader(file));
+                            String tempString = null;
+                            tempString = reader.readLine();
+                            username=tempString;
+                            reader.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } finally {
+                            if (reader != null) {
+                                try {
+                                    reader.close();
+                                } catch (IOException e1) {
+                                }
+                            }
+                        }
+                        //要连接的数据库url,注意：此处连接的应该是服务器上的MySQl的地址
+                        String url = "jdbc:mysql://sh-cynosdbmysql-grp-7whhqd4o.sql.tencentcdb.com:23716/personal_info?useSSL=false";
+                        //连接数据库使用的用户名
+                        String userName = "root";
+                        //连接的数据库时使用的密码
+                        String password = "Mmsqwcm.?";
+                        Connection connection = null;
+                        try {
+                            //1、加载驱动
+                            Class.forName("com.mysql.jdbc.Driver").newInstance();
+                            System.out.println("驱动加载成功！！！"+exp1.getExp());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            //2、获取与数据库的连接
+                            connection = DriverManager.getConnection(url, userName, password);
+                            System.out.println("连接数据库成功！！！");
+                            String sql = "update Try set time='"+exp1.getExp()+"' WHERE name='"+userName+"'";
+                            PreparedStatement ps = connection.prepareStatement(sql);
+                            ps.execute(sql);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        } finally {
+                            if (connection != null) {
+                                try {
+                                    connection.close();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+                }).start();
             }
         });
         ly.startCountDown();
