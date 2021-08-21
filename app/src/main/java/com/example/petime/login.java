@@ -14,6 +14,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 
 public class login extends AppCompatActivity {
     private TextView tv_main_title;//标题
@@ -101,6 +105,14 @@ public class login extends AppCompatActivity {
                                 else if (DBConnection.link(2, userName, psw) != -1) {
                                     Looper.prepare();
                                     Toast.makeText(login.this, "登录成功", Toast.LENGTH_SHORT).show();
+                                    try {
+                                        BufferedWriter out = new BufferedWriter(new FileWriter("name.txt"));
+                                        out.write(userName);
+                                        out.close();
+                                        System.out.println("文件创建成功！");
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
                                     login.this.finish();
                                     //跳转到主界面，登录成功的状态传递到 MainActivity 中
                                     Intent intent = new Intent(login.this, MainActivity.class);
