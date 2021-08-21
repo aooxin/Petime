@@ -24,6 +24,10 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -48,6 +52,8 @@ public class study extends AppCompatActivity {
     static int time=0;
     static int count=1;
     private PopupWindow popWindow;
+    private Todosql todosql;
+    private List<TodoList> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +64,8 @@ public class study extends AppCompatActivity {
         }
         setContentView(R.layout.activity_study);
         ScrollView scrollView = (ScrollView) findViewById(R.id.scrollView);
+        todosql = new Todosql(study.this,"test_carson",null, 2);
+        list=todosql.query();
         inited();
     }
     @Override
@@ -80,49 +88,20 @@ public class study extends AppCompatActivity {
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LinearLayout ly=(LinearLayout)inflater.inflate(R.layout.activity_todo,linearLayout,false).findViewById(R.id.todo_layout);
-                LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                linearLayout.addView(ly);
-                begin=(Button)findViewById(R.id.begin);
-                begin.setId(begin_id);
-                ListBtn_Show.add(begin);
-                begin.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(study.this,"Begin",Toast.LENGTH_SHORT).show();
-                        int i = 0;
-                        for (; i <ListBtn_Show.size(); i++) {
-                            if (ListBtn_Show.get(i) == view) {
-                                i=map.get(ListBtn_Show.get(i).getId());
-                                break;
-                            }
-                        }
-                        TextView te=findViewById(i);
-                        String h=te.getText().toString();
-                        h=h.substring(0,h.length()-2);
-                        time=Integer.parseInt(h);
-                        Intent intent=new Intent(study.this,clock.class);
-                        intent.putExtra("data",time);
-                        startActivity(intent);
-                    }
-                });
-                textname=(TextView)findViewById(R.id.todo_name);
-                textname.setId(name_id);
-                textView=(TextView)findViewById(R.id.todo_time);
-                textView.setId(time_id);
-                map.put(begin_id,time_id);
-                name_id++;
+                TodoList todo=new TodoList();
+                todo.setBeginid(Integer.toString(begin_id));
+                todo.setSetid(Integer.toString(time_id));
+                todo.setNameid(Integer.toString(name_id));
+                begin_id++;
                 time_id++;
-                begin_id ++;
-                textView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        showPopupWindow();
-                    }
-                });
+                name_id++;
+                todo.setTextname("Todo1");
+                todo.setTime("20");
+                todosql.insertData(todo);
+                add_todo(inflater,linearLayout,todo);
+                ++count;
             }
         });
-
         btn_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,9 +115,51 @@ public class study extends AppCompatActivity {
                 }
             }
         });
-
+        for (TodoList good : list) {
+            add_todo(inflater,linearLayout,good);
+            ++count;
+        }
+        begin_id+=count;
+        time_id+=count;
+        name_id+=count;
     }
-    private void showPopupWindow() {
+    private void add_todo(LayoutInflater inflater,LinearLayout linearLayout,TodoList todo1){
+        LinearLayout ly=(LinearLayout)inflater.inflate(R.layout.activity_todo,linearLayout,false).findViewById(R.id.todo_layout);
+        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        linearLayout.addView(ly);
+        begin=(Button)findViewById(R.id.begin);
+        begin.setId(Integer.parseInt(todo1.getBeginid()));
+        ListBtn_Show.add(begin);
+        begin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(study.this,"Begin",Toast.LENGTH_SHORT).show();
+                int k=view.getId();
+                int i =todosql.queryfrombeginid(Integer.toString(view.getId()));
+                TextView te=findViewById(i);
+                String h=te.getText().toString();
+                h=h.substring(0,h.length()-2);
+                time=Integer.parseInt(h);
+                Intent intent=new Intent(study.this,clock.class);
+                intent.putExtra("data",time);
+                startActivity(intent);
+            }
+        });
+        textname=(TextView)findViewById(R.id.todo_name);
+        textname.setId(Integer.parseInt(todo1.getNameid()));
+        textname.setText(todo1.getTextname());
+        textView=(TextView)findViewById(R.id.todo_time);
+        textView.setId(Integer.parseInt(todo1.getSetid()));
+        textView.setText(todo1.getTime()+"分钟");
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPopupWindow(view.getId(),todosql.queryfromsetid2(Integer.toString(view.getId())));
+            }
+        });
+    }
+
+    private void showPopupWindow(int i,int nid) {
         //设置contentView
         View contentView = LayoutInflater.from(study.this).inflate(R.layout.clockpopup, null);
         popWindow = new PopupWindow(contentView,
@@ -147,17 +168,35 @@ public class study extends AppCompatActivity {
         Button OK=(Button)contentView.findViewById(R.id.OK);
         EditText ed_time=(EditText)contentView.findViewById(R.id.time);
         EditText ed_title=(EditText)contentView.findViewById(R.id.title);
+        textView=(TextView)findViewById(i);
+        textname=findViewById(nid);
         OK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                TodoList todo=new TodoList();
                 if(ed_time.getText().toString().equals(""))
-                {textView.setText(20+"分钟");}
+                {textView.setText(20+"分钟");
+                    todo.setTime("20");}
+                else {
+                    textView.setText(ed_time.getText().toString() + "分钟");
+                    todo.setTime(ed_time.getText().toString());
+                }
+                if(ed_title.getText().toString().equals(""))
+                {
+                    textname.setText("Untitle");
+                    todo.setTextname("Untitle");
+                }
                 else
-                    textView.setText(ed_time.getText().toString()+"分钟");
-                if(ed_title.getText().toString().equals("")){textname.setText("Untitle");}
-                else
+                {
                     textname.setText(ed_title.getText());
+                    todo.setTextname(ed_title.getText().toString());
+                }
                 popWindow.dismiss();
+                todo.setBeginid(Integer.toString(todosql.queryfromsetid(Integer.toString(i))));
+                todo.setSetid(Integer.toString(i));
+                todo.setNameid(Integer.toString(nid));
+                int i=todosql.updatebase(todo);
+                System.out.println(i);
             }
         });
         View rootview = LayoutInflater.from(study.this).inflate(R.layout.activity_study, null);
