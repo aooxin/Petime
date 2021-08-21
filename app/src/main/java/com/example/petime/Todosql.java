@@ -32,6 +32,7 @@ public class Todosql extends SQLiteOpenHelper {
     public void insertData(TodoList todo){
         SQLiteDatabase db=getWritableDatabase();
         ContentValues value=new ContentValues();
+        value.put("_id",todo.getLayoutid());
         value.put("textname",todo.getTextname());
         value.put("setid",todo.getSetid());
         value.put("time",todo.getTime());
@@ -49,12 +50,14 @@ public class Todosql extends SQLiteOpenHelper {
         Cursor cursor = db.query("Goods",null,null,null,null,null,null);
         if(cursor!=null){
             while(cursor.moveToNext()){
+                String id=cursor.getString(cursor.getColumnIndex("_id"));
                 String textname=cursor.getString(cursor.getColumnIndex("textname"));
                 String setid= cursor.getString(cursor.getColumnIndex("setid"));
                 String time= cursor.getString(cursor.getColumnIndex("time"));
                 String beginid= cursor.getString(cursor.getColumnIndex("beginid"));
                 String nameid= cursor.getString(cursor.getColumnIndex("nameid"));
                 TodoList todoList=new TodoList();
+                todoList.setLayoutid(id);
                 todoList.setTextname(textname);
                 todoList.setSetid(setid);
                 todoList.setTime(time);
@@ -69,6 +72,7 @@ public class Todosql extends SQLiteOpenHelper {
     public int updatebase(TodoList todo){
         SQLiteDatabase db=getWritableDatabase();
         ContentValues value=new ContentValues();
+        value.put("_id",todo.getLayoutid());
         value.put("textname",todo.getTextname());
         value.put("setid",todo.getSetid());
         value.put("time",todo.getTime());
@@ -109,9 +113,28 @@ public class Todosql extends SQLiteOpenHelper {
         Cursor cursor= db.query("Goods",null,"beginid like ?",new String[]{beginid},null,null,null);
         if(cursor!=null){
             cursor.moveToNext();
-            return Integer.parseInt(cursor.getString(cursor.getColumnIndex("setid")));
+            String layoutid= cursor.getString(cursor.getColumnIndex("_id"));
+            cursor.close();
+            return Integer.parseInt(layoutid);
         }
-        else return -1;
+        else{
+            cursor.close();
+            return -1;
+        }
+    }
+    public int queryfrombeginid2(String beginid){
+        SQLiteDatabase db=getWritableDatabase();
+        Cursor cursor= db.query("Goods",null,"beginid like ?",new String[]{beginid},null,null,null);
+        if(cursor!=null){
+            cursor.moveToNext();
+            String time= cursor.getString(cursor.getColumnIndex("time"));
+            cursor.close();
+            return Integer.parseInt(time);
+        }
+        else{
+            cursor.close();
+            return -1;
+        }
     }
 }
 

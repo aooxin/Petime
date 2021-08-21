@@ -1,14 +1,15 @@
 package com.example.petime;
 
 public class TodoList {
+    private String layoutid;
     private String textname;
     private String time;
     private String setid;
     private String beginid;
     private String nameid;
-
     public TodoList() {
     }
+    public String getLayoutid(){return layoutid; }
     public String getTextname(){
         return textname;
     }
@@ -22,6 +23,11 @@ public class TodoList {
         return setid;
     }
     public String getNameid(){return nameid;}
+
+    public void setLayoutid(String layoutid) {
+        this.layoutid = layoutid;
+    }
+
     public void setTextname(String name){
         textname=name;
     }
