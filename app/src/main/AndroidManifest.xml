@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.petime" >
+    package="com.example.petime">
 
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -21,12 +21,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Petime">
 
-        <service
-            android:name=".MyIntentService"
-            android:exported="false"></service>
-
-=======
-        android:theme="@style/Theme.Petime" >
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/shape2" />
@@ -34,7 +28,7 @@
         <activity
             android:name=".music"
             android:exported="true" />
->>>>>>> Stashed changes
+
         <activity
             android:name=".FeedbackActivity2"
             android:exported="true" />
@@ -46,10 +40,10 @@
         <activity
             android:name=".clock"
             android:exported="true" />
-        <activity android:name=".splashscreen" >
+
+        <activity android:name=".splashscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -63,7 +57,7 @@
             android:theme="@style/Theme.Petime.NoActionBar" />
         <activity
             android:name=".changeimage"
-            android:label="imagechange" >
+            android:label="imagechange">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="com.example.activitytest.ACTIONSTART"/> -->
@@ -72,7 +66,7 @@
         </activity>
         <activity android:name=".login" />
         <activity android:name=".regist" />
-        <activity android:name=".pethouse_activity"/>
+        <activity android:name=".pethouse_activity" />
     </application>
 
 </manifest>

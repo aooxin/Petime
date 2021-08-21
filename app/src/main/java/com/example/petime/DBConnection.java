@@ -39,7 +39,7 @@ public class DBConnection {
                 }
                 case 1:{
                     String sql = "insert into Try "+ " values(" + "'" + name + "'" + "," + "'" + password2+ "'"
-                            +",'60','60','60','60','60','60','100')";
+                            +",'60','60','60','60','60','60','100','0')";
                     PreparedStatement ps = connection.prepareStatement(sql);
                     ps.execute(sql);
                 }
