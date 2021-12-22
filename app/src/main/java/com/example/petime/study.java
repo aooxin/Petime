@@ -49,6 +49,7 @@ public class study extends AppCompatActivity {
     private int begin_id=1000;
     private int time_id=2000;
     private int name_id=3000;
+    private int layout_id=4000;
     static int time=0;
     static int count=1;
     private PopupWindow popWindow;
@@ -92,9 +93,11 @@ public class study extends AppCompatActivity {
                 todo.setBeginid(Integer.toString(begin_id));
                 todo.setSetid(Integer.toString(time_id));
                 todo.setNameid(Integer.toString(name_id));
+                todo.setLayoutid(Integer.toString(layout_id));
                 begin_id++;
                 time_id++;
                 name_id++;
+                layout_id++;
                 todo.setTextname("Todo1");
                 todo.setTime("20");
                 todosql.insertData(todo);
@@ -108,9 +111,37 @@ public class study extends AppCompatActivity {
                 //判断编辑按钮的状态
                 if (EDITSTATE == 0) {
                     btn_edit.setText("确定");
+                    list=todosql.query();
+                    for(TodoList todo:list){
+                        begin=(Button)findViewById(Integer.parseInt(todo.getBeginid()));
+                        begin.setText("删除");
+                        begin.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                linearLayout.removeView(findViewById(todosql.queryfrombeginid(Integer.toString(view.getId()))));
+                                todosql.deletelist(Integer.toString(view.getId()));
+                            }
+                        });
+                    }
                     EDITSTATE = 1;
                 } else if (EDITSTATE == 1) {
                     btn_edit.setText("编辑");
+                    list=todosql.query();
+                    for(TodoList todo:list){
+                        begin=(Button)findViewById(Integer.parseInt(todo.getBeginid()));
+                        begin.setText("开始");
+                        begin.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Toast.makeText(study.this,"Begin",Toast.LENGTH_SHORT).show();
+                                int k=todosql.queryfrombeginid2(Integer.toString(view.getId()));
+                                time=k;
+                                Intent intent=new Intent(study.this,clock.class);
+                                intent.putExtra("data",time);
+                                startActivity(intent);
+                            }
+                        });
+                    }
                     EDITSTATE = 0;
                 }
             }
@@ -122,10 +153,12 @@ public class study extends AppCompatActivity {
         begin_id+=count;
         time_id+=count;
         name_id+=count;
+        layout_id+=count;
     }
     private void add_todo(LayoutInflater inflater,LinearLayout linearLayout,TodoList todo1){
         LinearLayout ly=(LinearLayout)inflater.inflate(R.layout.activity_todo,linearLayout,false).findViewById(R.id.todo_layout);
         LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        ly.setId(Integer.parseInt(todo1.getLayoutid()));
         linearLayout.addView(ly);
         begin=(Button)findViewById(R.id.begin);
         begin.setId(Integer.parseInt(todo1.getBeginid()));
@@ -134,12 +167,8 @@ public class study extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(study.this,"Begin",Toast.LENGTH_SHORT).show();
-                int k=view.getId();
-                int i =todosql.queryfrombeginid(Integer.toString(view.getId()));
-                TextView te=findViewById(i);
-                String h=te.getText().toString();
-                h=h.substring(0,h.length()-2);
-                time=Integer.parseInt(h);
+                int k=todosql.queryfrombeginid2(Integer.toString(view.getId()));
+                time=k;
                 Intent intent=new Intent(study.this,clock.class);
                 intent.putExtra("data",time);
                 startActivity(intent);
@@ -195,6 +224,7 @@ public class study extends AppCompatActivity {
                 todo.setBeginid(Integer.toString(todosql.queryfromsetid(Integer.toString(i))));
                 todo.setSetid(Integer.toString(i));
                 todo.setNameid(Integer.toString(nid));
+                todo.setLayoutid(Integer.toString(todosql.queryfrombeginid(todo.getBeginid())));
                 int i=todosql.updatebase(todo);
                 System.out.println(i);
             }
