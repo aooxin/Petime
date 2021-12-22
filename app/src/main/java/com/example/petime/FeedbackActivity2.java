@@ -15,8 +15,6 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.HashMap;
 
 public class FeedbackActivity2 extends AppCompatActivity {
@@ -28,7 +26,6 @@ public class FeedbackActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback2);
-        // todo 在我们的这个位置的话就是设置我们的已将反馈的界面
         initView();
     }
 

@@ -3,13 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/nav_slideshow">
-
-    <fragment
-        android:id="@+id/nav_home"
-        android:name="com.example.petime.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+    app:startDestination="@id/nav_home">
 
     <fragment
         android:id="@+id/nav_setting"
@@ -24,7 +18,7 @@
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="com.example.petime.FriendsFragment"
-        android:label="fragment_item_list"
+        android:label="好友列表"
         tools:layout="@layout/friends_fragment_item_list2" />
 
     <activity
@@ -32,5 +26,10 @@
         android:name="com.example.petime.study"
         android:label="activity_study"
         tools:layout="@layout/activity_study" />
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.petime.ListFFragment"
+        android:label="Home" />
 
 </navigation>
